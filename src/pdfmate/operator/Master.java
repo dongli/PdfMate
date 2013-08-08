@@ -10,8 +10,8 @@ public class Master {
 		if (CommandLine.getOperatorName() == null) {
 			if (CommandLine.hasOption("-v"))
 				printVersion();
-		} else if (CommandLine.getOperatorName().equals("extract")) {
-//			Extract.operate();
+		} else if (CommandLine.getOperatorName().matches("extract-.*")) {
+			Extract.operate();
 		} else if (CommandLine.getOperatorName().equals("help")) {
 			printHelp();
 		}
@@ -30,9 +30,10 @@ public class Master {
 		CommandLine.addOption(null,
 				"-v", "Print the version information", false, null);
 		// ---------------------------------------------------------------------
-		CommandLine.addOperator("extract",
-				"Extract information from PDF file", true);
-		CommandLine.addOperand("extract", "pages", false, null, null);
+		CommandLine.addOperator("extract-pages",
+				"Extract pages from PDF file", true);
+		CommandLine.addOperand("extract-pages",
+				"page range, e.g., 1-10", true, "all", "all the pages");
 		// ---------------------------------------------------------------------
 		CommandLine.addOperator("help",
 				"Print help information or usage.", true);

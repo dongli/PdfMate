@@ -1,6 +1,19 @@
 # Description
 
-**PdfMate** is a small tool that provides several utilities to deal with PDF files. For the time being, its main function is to add the missing *TOC* (Table Of Content) into the PDF files.
+**PdfMate** is a small tool that provides several utilities to deal with PDF files. For the time being, its main function is to add the missing *TOC* (Table Of Content) into the PDF files and only command line interface is provided.
+
+# Installation
+
+Although **PdfMate** is written in Java, I only support Linux and Mac platform officially. The installer can be downloaded [here](https://github.com/dongli/PdfMate/raw/master/products/installer/pdfmate.installer). After downloading, invoke
+```
+$ chmod a+x pdfmate.installer
+$ ./pdfmate.installer
+```
+and relogin. You should be able call **PdfMate** as
+```
+$ pdfmate help
+```
+**Note**: Try to use **TAB** key to autocomplete the typing in BASH.
 
 # Usage
 

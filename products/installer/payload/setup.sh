@@ -11,10 +11,10 @@ function _pdfmate_()
     completed_words=""
     case "${prev_argv##*/}" in
     "pdfmate")
-        completed_words="help extract-pages insert-toc"
+        completed_words="help extract-pages insert-toc update"
         ;;
     "help")
-        completed_words="extract-pages insert-toc"
+        completed_words="extract-pages insert-toc update"
         ;;
     esac
     COMPREPLY=($(compgen -W "$completed_words" -- $curr_argv))

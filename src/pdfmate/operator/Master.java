@@ -14,6 +14,8 @@ public class Master {
 			Extract.operate();
 		} else if (CommandLine.getOperatorName().matches("insert-.*")) {
 			Insert.operate();
+		} else if (CommandLine.getOperatorName().equals("update")) {
+			Update.operate();
 		} else if (CommandLine.getOperatorName().equals("help")) {
 			printHelp();
 		}
@@ -46,6 +48,8 @@ public class Master {
 		CommandLine.addOption("insert-toc",
 				"--encoding", "Specify the encoding of TOC text file",
 				true, "TOC file encoding (default is UTF-8)");
+		// ---------------------------------------------------------------------
+		CommandLine.addOperator("update", "Update PdfMate", false);
 		// ---------------------------------------------------------------------
 		CommandLine.addOperator("help",
 				"Print help information or usage.", true);

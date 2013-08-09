@@ -7,7 +7,6 @@ import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.parser.*;
 
 import pdfmate.ui.*;
-import pdfmate.utils.SystemUtils;
 
 public class Extract {
 	public static void operate() {
@@ -43,10 +42,7 @@ public class Extract {
 			for (Integer pageNumber : pageNumbers) {
 				String content = PdfTextExtractor
 						.getTextFromPage(reader, pageNumber);
-				SystemUtils.print(
-						"@|bold --------------------------------------------- PAGE "+pageNumber+
-						       " ---------------------------------------------|@\n");
-				System.out.println(content);
+				System.err.println(content);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

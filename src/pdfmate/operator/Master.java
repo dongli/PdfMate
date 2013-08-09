@@ -42,7 +42,10 @@ public class Master {
 		CommandLine.addOperand("insert-toc",
 				"Text file contains contents information", false, null, null);
 		CommandLine.addOption("insert-toc",
-				"--toc", "Specify the TOC txt file", true, "TOC file");
+				"--toc", "Specify the TOC text file", true, "TOC file");
+		CommandLine.addOption("insert-toc",
+				"--encoding", "Specify the encoding of TOC text file",
+				true, "TOC file encoding (default is UTF-8)");
 		// ---------------------------------------------------------------------
 		CommandLine.addOperator("help",
 				"Print help information or usage.", true);

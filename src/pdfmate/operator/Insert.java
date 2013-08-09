@@ -43,9 +43,17 @@ public class Insert {
 			PdfOutline outlineRoot = copy.getDirectContent().getRootOutline();
 			Stack<PdfOutline> outlineStack = new Stack<PdfOutline>();
 			FileInputStream inputStream = new FileInputStream(tocFile);
+			String encoding = "UTF-8";
+			if (CommandLine.hasOption("--encoding")) {
+				encoding = CommandLine.getOptionValue("--encoding");
+			}
+			if (!Charset.isSupported(encoding))
+				UI.error("pdfmate",
+						"When reading TOC text file, encoding "+
+						encoding+" is not supported!");
 			BufferedReader inputBuffer = new BufferedReader(
 					new InputStreamReader(inputStream,
-							Charset.forName("UTF-8")));
+							Charset.forName(encoding)));
 			String line = null;
 			int lastLevel = -1;
 			while ((line = inputBuffer.readLine()) != null) {

@@ -12,6 +12,8 @@ public class Master {
 				printVersion();
 		} else if (CommandLine.getOperatorName().matches("extract-.*")) {
 			Extract.operate();
+		} else if (CommandLine.getOperatorName().matches("insert-.*")) {
+			Insert.operate();
 		} else if (CommandLine.getOperatorName().equals("help")) {
 			printHelp();
 		}
@@ -33,12 +35,19 @@ public class Master {
 		CommandLine.addOperator("extract-pages",
 				"Extract pages from PDF file", true);
 		CommandLine.addOperand("extract-pages",
-				"page range, e.g., 1-10", true, "all", "all the pages");
+				"Page range, e.g., 1-10", true, "all", "all the pages");
+		// ---------------------------------------------------------------------
+		CommandLine.addOperator("insert-toc",
+				"Insert table of contents into PDF file", true);
+		CommandLine.addOperand("insert-toc",
+				"Text file contains contents information", false, null, null);
+		CommandLine.addOption("insert-toc",
+				"--toc", "Specify the TOC txt file", true, "TOC file");
 		// ---------------------------------------------------------------------
 		CommandLine.addOperator("help",
 				"Print help information or usage.", true);
 		CommandLine.addOperand("help",
-				"operator to help",
+				"Operator to help",
 				true, "all", "all help");
 	}
 	

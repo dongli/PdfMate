@@ -9,6 +9,7 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
 import pdfmate.ui.*;
+import pdfmate.utils.*;
 
 public class Insert {
 	public static void operate() {
@@ -47,10 +48,13 @@ public class Insert {
 			if (CommandLine.hasOption("--encoding")) {
 				encoding = CommandLine.getOptionValue("--encoding");
 			}
-			if (!Charset.isSupported(encoding))
+			if (!Charset.isSupported(encoding)) {
+				UI.notice("pdfmate", "Available encodings:");
+				SystemUtils.showAvailableCharset();
 				UI.error("pdfmate",
 						"When reading TOC text file, encoding "+
 						encoding+" is not supported!");
+			}
 			BufferedReader inputBuffer = new BufferedReader(
 					new InputStreamReader(inputStream,
 							Charset.forName(encoding)));

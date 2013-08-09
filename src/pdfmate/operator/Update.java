@@ -55,6 +55,16 @@ public class Update {
 			String[] fileNames = {
 				"pdfmate", "pdfmate.jar", "install.info", "setup.sh"
 			};
+			String[] existFileNames = (new File(dirBase)).list();
+			for (String fileName : fileNames) {
+				// check if there is any incomplete download file
+				for (String existFileName : existFileNames)
+					if (existFileName.matches(fileName+":.*"))
+						if (!(new File(dirBase+existFileName)).delete())
+							UI.error("pdfmate",
+									"Failed to delete incomplete file "+
+									existFileName+"!");
+			}
 			for (String fileName : fileNames) {
 				UI.notice("pdfmate", "Download "+urlBase+fileName+".");
 				SystemUtils.download(urlBase+fileName, dirBase+fileName);

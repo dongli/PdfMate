@@ -5,6 +5,7 @@ import static org.fusesource.jansi.Ansi.ansi;
 import java.io.*;
 import java.net.*;
 import java.nio.channels.*;
+import java.nio.charset.*;
 import java.util.*;
 
 import javax.net.ssl.*;
@@ -124,9 +125,14 @@ public class SystemUtils {
         try {
 			ReadableByteChannel channel =
 					Channels.newChannel(connection.getInputStream());
-		    FileOutputStream fos = new FileOutputStream(localPath);
+			String localTempPath = localPath+":"+UUID.randomUUID().toString();
+		    FileOutputStream fos = new FileOutputStream(localTempPath);
 		    fos.getChannel().transferFrom(channel, 0, Long.MAX_VALUE);
 		    fos.close();
+		    // when succeed, move the temporal file to the final one
+		    File tempFile = new File(localTempPath);
+		    File finalFile = new File(localPath);
+		    tempFile.renameTo(finalFile);
 		} catch (Exception e) {
             e.printStackTrace();
 			UI.error("codemate", "Failed to save "+localPath+"!");
@@ -171,5 +177,24 @@ public class SystemUtils {
 		    	}
 		}
 		return content;
+	}
+	
+	public static void showAvailableCharset() {
+		Map<?, ?> charSets = Charset.availableCharsets();
+		Iterator<?> it = charSets.keySet().iterator();
+		while(it.hasNext()) {
+			String csName = (String)it.next();
+			System.out.print(csName);
+			Iterator<?> aliases = ((Charset)charSets.get(csName))
+					.aliases().iterator();
+			if(aliases.hasNext())
+				System.out.print(": ");
+			while(aliases.hasNext()) {
+				System.out.print(aliases.next());
+				if(aliases.hasNext())
+					System.out.print(", ");
+			}
+			System.out.println();
+		}
 	}
 }

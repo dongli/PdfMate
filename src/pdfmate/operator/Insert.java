@@ -105,24 +105,18 @@ public class Insert {
 	private static String[] splitTocEntry(String entry) {
 		String[] res = {"", "", ""};
 		int i = 0;
-		while (i < entry.length()) {
-			if (entry.substring(i, i+1).matches("\\d|\\.|\\-")) {
-				while (entry.charAt(i) != ' ')
-					res[0] += entry.charAt(i++);
-				break;
-			}
-			i++;
-		}
+		while (entry.charAt(i) != ' ')
+			res[0] += entry.charAt(i++);
+		if (!res[0].matches("(\\w+\\.)|(\\w+)|(-)|(.)"))
+			UI.error("pdfmate", "The hierarchy level \""+
+					res[0]+"\" in TOC entry \""+entry+"\" is not valid!");
 		int j = entry.length()-1;
-		while (j >= 0) {
-			if (entry.substring(j, j+1).matches("\\d")) {
-				while (entry.charAt(j) != ' ')
-					j--;
-				break;
-			}
+		while (entry.charAt(j) != ' ')
 			j--;
-		}
 		res[2] = entry.substring(j+1, entry.length());
+		if (!res[2].matches("\\d+"))
+			UI.error("pdfmate", "The page number \""+
+					res[2]+"\" in TOC entry \""+entry+"\" is not a number!");
 		res[1] = entry.substring(i, j+1).replaceAll("(^ *| *$)", "");
 		return res;
 	}

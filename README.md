@@ -39,10 +39,14 @@ $ pdfmate extract-pages <path to PDF> 2> <path to outputted toc text file>
 By now, you got a text file that contains the contents table and also some other stuffs, so you need manually edit it to the following list of TOC entries:
 ```
 # <hierarchy level> <title> <page number>
-1.1 Some Title Words 45
+1 Some Root-level Title Words 44
+1.1 Some Sub-level Title Words 45
+. Some Sub-level Title Words 45
+.. Some Sub-sub-level Title Words 46
+- Some Root-level Title Words 60
 ...
 ```
-Any line starting with `#` will be commented. Each line will be an entry in the final TOC with the first two items as the title and the last one as the page number that this entry links to.
+Any line starting with `#` will be commented. Each line will be an entry in the final TOC with the first two items as the title and the last one as the page number that this entry links to. If a sub-level entry has no hierarchy level number, use `.` to specify the level. And for a root-level entry has no number, use `-`.
 
 Then invoke operator `insert-toc` as
 ```

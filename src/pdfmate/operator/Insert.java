@@ -81,7 +81,7 @@ public class Insert {
 						for (int i = level; i <= lastLevel; ++i)
 							outlineStack.pop();
 					}
-					if (hierLevel.matches("^\\.+$"))
+					if (hierLevel.matches("^(\\.+|-)$"))
 						hierLevel = "";
 					outline = new PdfOutline(
 							outlineStack.lastElement(),
@@ -106,7 +106,7 @@ public class Insert {
 		String[] res = {"", "", ""};
 		int i = 0;
 		while (i < entry.length()) {
-			if (entry.substring(i, i+1).matches("\\d|\\.")) {
+			if (entry.substring(i, i+1).matches("\\d|\\.|\\-")) {
 				while (entry.charAt(i) != ' ')
 					res[0] += entry.charAt(i++);
 				break;
